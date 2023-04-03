@@ -29,7 +29,7 @@ public class CalculatorTests
     }
 
     [Fact]
-    public void Add_WithDifferentSeparators_ShouldReturnNumber()
+    public void Add_WithDifferentSeparators_ShouldReturnSum()
     {
         var result = _calculator.Add("//;\\n1;\\n2,\\3");
         
@@ -45,7 +45,7 @@ public class CalculatorTests
     }
     
     [Fact]
-    public void Add_NumbersAboveUpperLimit_AreIgnored()
+    public void Add_NumbersAboveUpperLimit_ShouldSkipNumberAboveLimit()
     {
         var result = _calculator.Add("1,10000");
         
@@ -53,7 +53,7 @@ public class CalculatorTests
     }
     
     [Fact]
-    public void Add_NumbersWithCustomSeparator_ReturnsNumber()
+    public void Add_NumbersWithCustomSeparator_ReturnsSum()
     {
         var result = _calculator.Add("//;\\n2;3");
 
@@ -61,7 +61,7 @@ public class CalculatorTests
     }
     
     [Fact]
-    public void Add_NumbersWithLongCustomSeparator_ReturnsNumber()
+    public void Add_NumbersWithLongCustomSeparator_ReturnsSum()
     {
         var result = _calculator.Add("//[***]\\n1***2***3");
 
@@ -69,11 +69,18 @@ public class CalculatorTests
     }
 
     [Fact]
-    public void Add_NumbersWithSeveralCustomSeparators_ReturnsNumber()
+    public void Add_NumbersWithSeveralCustomSeparators_ReturnsSum()
     {
         var result = _calculator.Add("//[*][%]\\n1*2%3");
         
         Assert.Equal(6, result);
     }
-
+    
+    [Fact]
+    public void Add_CustomSeparatorAsNestedBrackets_ReturnSum()
+    {
+        var result = _calculator.Add("//[[[a][a]\\n1[[a2a");
+        
+        Assert.Equal(3, result);
+    }
 }
