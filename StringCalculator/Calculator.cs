@@ -4,7 +4,7 @@ public class Calculator
 {
     public int Add(string expression)
     {
-        const int upperLimit = 1000;
+        var upperLimit = 1000;
         if (string.IsNullOrEmpty(expression))
         {
             return 0;
@@ -37,9 +37,9 @@ public class Calculator
 
     private IEnumerable<string> GetCustomSeparators(string input)
     {
-        const int minimumCustomSeparatorLength = 3;
-        
-        var separators = Array.Empty<string>();
+        var minimumCustomSeparatorLength = 3;
+
+        var separators = new List<string>();
 
         if (input.Length == minimumCustomSeparatorLength)
         {
