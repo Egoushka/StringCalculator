@@ -45,15 +45,51 @@ public class Calculator
 
         if (input.Length == minimumCustomSeparatorLength)
         {
-            separators = new[] { input[minimumCustomSeparatorLength - 1].ToString() };
+            var separator = input.Substring(2, 1);
+            separators.Add(separator);
         }
         else
         {
-            separators = input.Split(new[] { '[', ']' }, StringSplitOptions.RemoveEmptyEntries);
+            var separatorsInBrackets = GetSeparatorsInBrackets(input);
+            separators.AddRange(separatorsInBrackets);
         }
 
         return separators;
     }
+
+    private IEnumerable<string> GetSeparatorsInBrackets(string input)
+    {
+        var values = new List<string>();
+        var stack = new Stack<int>();
+
+        for (var i = 0; i < input.Length; i++)
+        {
+            var c = input[i];
+            if (c == '[' && stack.Count == 0)
+            {
+                stack.Push(i);
+            }
+            else if (c == ']')
+            {
+                //if it's not the last character and the next character is not a '['
+                if (i != input.Length - 1 && input[i + 1] != '[')
+                {
+                    continue;
+                }
+
+                if (stack.Count <= 0) continue;
+
+                var startIndex = stack.Pop();
+                var length = i - startIndex - 1;
+                var value = input.Substring(startIndex + 1, length);
+
+                values.Add(value);
+            }
+        }
+
+        return values.ToArray();
+    }
+
     private void ThrowExceptionIfAnyNegativeNumbers(IEnumerable<int> numbers)
     {
         var negativeNumbers = numbers.Where(x => x < 0);
