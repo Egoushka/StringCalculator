@@ -26,6 +26,7 @@ public class StringCalculatorKataTests
         
         Assert.Equal(1, result);
     }
+    
     [Fact]
     public void Add_WithDifferentSeparators_IsCorrect()
     {
@@ -33,6 +34,7 @@ public class StringCalculatorKataTests
         
         Assert.Equal(6, result);
     }
+    
     [Fact]
     public void Add_WithNegativeNumbers_ThrowException()
     {
@@ -40,6 +42,7 @@ public class StringCalculatorKataTests
         
         Assert.Equal("Negative numbers are not allowed (-1, -3)", exception.Message);
     }
+    
     [Fact]
     public void Add_WithNumberBiggerThanOneThousands_IsCorrect()
     {
