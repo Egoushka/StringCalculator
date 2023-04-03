@@ -1,8 +1,6 @@
-using System.Text.RegularExpressions;
-
 namespace StringCalculator;
 
-public class StringCalculator
+public class Calculator
 {
     public int Add(string expression)
     {
