@@ -19,10 +19,25 @@ public class StringCalculatorKataTests
         Assert.Equal(0, result);
     }
     [Fact]
-    public void SumIsCorrect()
+    public void SumIsCorrectWithOneNumber()
     {
-        var result = _stringCalculator.Add("//;\n1;2");
+        var result = _stringCalculator.Add("1");
         
-        Assert.Equal(3, result);
+        Assert.Equal(1, result);
     }
+    [Fact]
+    public void SumIsCorrectWithOneNumberAndComma()
+    {
+        var result = _stringCalculator.Add("1,");
+        
+        Assert.Equal(1, result);
+    }
+    [Fact]
+    public void SumIsCorrectWithDifferentSeparators()
+    {
+        var result = _stringCalculator.Add("//;\n1;2,3\n4/5\\6");
+        
+        Assert.Equal(21, result);
+    }
+    
 }
