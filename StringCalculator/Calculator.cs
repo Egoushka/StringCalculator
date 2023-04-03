@@ -50,7 +50,7 @@ public class Calculator
         }
         else
         {
-            var separatorsInBrackets = ExtractValuesInBrackets(input);
+            var separatorsInBrackets = ExtractValuesInBrackets("");
             separators.AddRange(separatorsInBrackets);
         }
 
@@ -59,36 +59,25 @@ public class Calculator
 
     private IEnumerable<string> ExtractValuesInBrackets(string input)
     {
-        var values = new List<string>();
         var stack = new Stack<int>();
 
-        for (var i = 0; i < input.Length; i++)
+        for (var index = 0; index < input.Length; index++)
         {
-            var c = input[i];
+            var c = input[index];
             if (c == '[' && stack.Count == 0)
             {
-                stack.Push(i);
+                stack.Push(index);
             }
-            else if (c == ']')
+            else if (c == ']' && stack.Count > 0 && (index == input.Length - 1 || input[index + 1] == '['))
             {
-                //if it's not the last character and the next character is not a '['
-                if (i != input.Length - 1 && input[i + 1] != '[')
-                {
-                    continue;
-                }
-
-                if (stack.Count <= 0) continue;
-
                 var startIndex = stack.Pop();
-                var length = i - startIndex - 1;
+                var length = index - startIndex - 1;
                 var value = input.Substring(startIndex + 1, length);
-
-                values.Add(value);
+                yield return value;
             }
         }
-
-        return values.ToArray();
     }
+    
 
     private void ThrowExceptionIfAnyNegativeNumbers(IEnumerable<int> numbers)
     {
