@@ -1,6 +1,6 @@
 namespace StringCalculator;
 
-public class StringCalculator
+public class StringCalculatorKata
 {
     private readonly char[] _separators = { ',', ' ', '\n', ';', '\\', '/' };
     public int Add(string numbers)
