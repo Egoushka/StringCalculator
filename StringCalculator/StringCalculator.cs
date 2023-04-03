@@ -1,6 +1,6 @@
 namespace StringCalculator;
 
-public class StringCalculatorKata
+public class StringCalculator
 {
     public int Add(string numbers)
     {
@@ -36,5 +36,4 @@ public class StringCalculatorKata
     {
         return numbers.Where(x => x < 1000).ToArray();
     }
-    
 }

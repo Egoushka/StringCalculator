@@ -1,15 +1,14 @@
-using StringCalculator;
 using Xunit;
 
 namespace StringCalculatorTests;
 
 public class StringCalculatorKataTests
 {
-    private readonly StringCalculatorKata _stringCalculator;
+    private readonly StringCalculator.StringCalculator _stringCalculator;
 
     public StringCalculatorKataTests()
     {
-        _stringCalculator = new StringCalculatorKata();
+        _stringCalculator = new StringCalculator.StringCalculator();
     }
 
     [Fact]
