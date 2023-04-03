@@ -39,5 +39,11 @@ public class StringCalculatorKataTests
         
         Assert.Equal(21, result);
     }
-    
+    [Fact]
+    public void ThrowExceptionWithNegativeNumbers()
+    {
+        var exception = Assert.Throws<ArgumentException>(() => _stringCalculator.Add("-1,2,-3"));
+        
+        Assert.Equal("Negative numbers are not allowed (-1, -3)", exception.Message);
+    }
 }
