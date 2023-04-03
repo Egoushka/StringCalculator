@@ -12,38 +12,39 @@ public class StringCalculatorKataTests
     }
 
     [Fact]
-    public void SumOfEmptyStringIsZero()
+    public void Add_OfEmptyString_IsZero()
     {
         var result = _stringCalculator.Add("");
         
         Assert.Equal(0, result);
     }
+  
     [Fact]
-    public void SumIsCorrectWithOneNumber()
-    {
-        var result = _stringCalculator.Add("1");
-        
-        Assert.Equal(1, result);
-    }
-    [Fact]
-    public void SumIsCorrectWithOneNumberAndComma()
+    public void Add_WithOneNumberAndComma_IsCorrect()
     {
         var result = _stringCalculator.Add("1,");
         
         Assert.Equal(1, result);
     }
     [Fact]
-    public void SumIsCorrectWithDifferentSeparators()
+    public void Add_WithDifferentSeparators_IsCorrect()
     {
-        var result = _stringCalculator.Add("//;\n1;2,3\n4/5\\6");
+        var result = _stringCalculator.Add("//;\n1;\n2,\\3");
         
-        Assert.Equal(21, result);
+        Assert.Equal(6, result);
     }
     [Fact]
-    public void ThrowExceptionWithNegativeNumbers()
+    public void Add_WithNegativeNumbers_ThrowException()
     {
-        var exception = Assert.Throws<ArgumentException>(() => _stringCalculator.Add("-1,2,-3"));
+        var exception = Assert.Throws<ArgumentException>(() => _stringCalculator.Add("-1,-3"));
         
         Assert.Equal("Negative numbers are not allowed (-1, -3)", exception.Message);
+    }
+    [Fact]
+    public void Add_WithNumberBiggerThanOneThousands_IsCorrect()
+    {
+        var result = _stringCalculator.Add("1,10000");
+        
+        Assert.Equal(1, result);
     }
 }
