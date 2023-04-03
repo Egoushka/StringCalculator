@@ -18,17 +18,17 @@ public class Calculator
         return numbersAsInts.Sum();
     }
     
-    private IEnumerable<int> ParseExpression(string numbers)
+    private IEnumerable<int> ParseExpression(string expression)
     {
-        var numbersToProcess = numbers;
+        var numbersToProcess = expression;
         var separators = new List<string> {",", "\\n", "\\"};
 
-        var partWithSeparators = numbers.Split("\\n").First();
+        var partWithSeparators = expression.Split("\\n").First();
         
         if(partWithSeparators.StartsWith("//"))
         {
             separators.AddRange(GetCustomSeparators(partWithSeparators));
-            numbersToProcess = numbers.Substring(partWithSeparators.Length + 2);
+            numbersToProcess = expression.Substring(partWithSeparators.Length + 2);
         }
         
         return numbersToProcess.Split(separators.ToArray(), StringSplitOptions.RemoveEmptyEntries)
@@ -47,7 +47,7 @@ public class Calculator
         }
         else
         {
-            separators = input.Split(new[] { ']', '[' }, StringSplitOptions.RemoveEmptyEntries);
+            separators = input.Split(new[] { '[', ']' }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         return separators;
