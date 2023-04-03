@@ -2,7 +2,6 @@ namespace StringCalculator;
 
 public class StringCalculatorKata
 {
-    private readonly char[] _separators = { ',', ' ', '\n', ';', '\\', '/' };
     public int Add(string numbers)
     {
         if (string.IsNullOrEmpty(numbers))
@@ -10,18 +9,32 @@ public class StringCalculatorKata
             return 0;
         }
 
-        var numbersArray = numbers.Split(_separators, StringSplitOptions.RemoveEmptyEntries);
-        var numbersAsInts = numbersArray.Select(int.Parse).ToArray();
-        
-        var negativeNumbers = numbersAsInts.Where(x => x < 0).ToArray();
-        if (negativeNumbers.Any())
+        var numbersAsInts = ParseNumbers(numbers);
+        numbersAsInts = RemoveNumbersBiggerThanOneThousands(numbersAsInts);
+
+        if (IsAnyNegativeNumbers(numbersAsInts, out var negativeNumbers))
         {
-            var negativeNumbersString = string.Join(", ", negativeNumbers);
-            throw new ArgumentException($"Negative numbers are not allowed ({negativeNumbersString})");
+            throw new ArgumentException($"Negative numbers are not allowed ({string.Join(", ", negativeNumbers)})");
         }
 
-        var sum = numbersAsInts.Sum();
-
-        return sum;
+        return numbersAsInts.Sum();
     }
+
+    private int[] ParseNumbers(string numbers)
+    {
+        var separators = new[] { ',', ' ', '\n', ';', '\\', '/' , '[', ']', '*'};
+        
+        return numbers.Split(separators, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+    }
+    private bool IsAnyNegativeNumbers(IEnumerable<int> numbers, out IEnumerable<int> negativeNumbers)
+    {
+        negativeNumbers = numbers.Where(x => x < 0);
+        
+        return negativeNumbers.Any();
+    }
+    private int[] RemoveNumbersBiggerThanOneThousands(IEnumerable<int> numbers)
+    {
+        return numbers.Where(x => x < 1000).ToArray();
+    }
+    
 }
