@@ -13,6 +13,12 @@ public class StringCalculatorKata
         var numbersArray = numbers.Split(_separators, StringSplitOptions.RemoveEmptyEntries);
         var numbersAsInts = numbersArray.Select(int.Parse).ToArray();
         
+        if(numbersAsInts.Any(x => x < 0))
+        {
+            var negativeNumbers = string.Join(", ", numbersAsInts.Where(x => x < 0));
+            throw new ArgumentException($"Negative numbers are not allowed ({negativeNumbers})");
+        }
+
         var sum = numbersAsInts.Sum();
 
         return sum;
