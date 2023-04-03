@@ -20,15 +20,17 @@ public class Calculator
     
     private IEnumerable<int> ParseExpression(string expression)
     {
-        var numbersToProcess = expression;
         var separators = new List<string> {",", "\\n", "\\"};
-
+        var numbersToProcess = expression;
         var partWithSeparators = expression.Split("\\n").First();
         
         if(partWithSeparators.StartsWith("//"))
         {
-            separators.AddRange(GetCustomSeparators(partWithSeparators));
-            numbersToProcess = expression.Substring(partWithSeparators.Length + 2);
+            var customSeparators = GetCustomSeparators(partWithSeparators);
+            separators.AddRange(customSeparators);
+            
+            var numbersStartIndex = partWithSeparators.Length + 2;
+            numbersToProcess = expression.Substring(numbersStartIndex);
         }
         
         return numbersToProcess.Split(separators.ToArray(), StringSplitOptions.RemoveEmptyEntries)
