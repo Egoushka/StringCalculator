@@ -3,11 +3,11 @@ using Xunit;
 
 namespace StringCalculatorTests;
 
-public class StringCalculatorKataTests
+public class CalculatorTests
 {
     private readonly Calculator _calculator;
 
-    public StringCalculatorKataTests()
+    public CalculatorTests()
     {
         _calculator = new Calculator();
     }
