@@ -50,14 +50,14 @@ public class Calculator
         }
         else
         {
-            var separatorsInBrackets = GetSeparatorsInBrackets(input);
+            var separatorsInBrackets = ExtractValuesInBrackets(input);
             separators.AddRange(separatorsInBrackets);
         }
 
         return separators;
     }
 
-    private IEnumerable<string> GetSeparatorsInBrackets(string input)
+    private IEnumerable<string> ExtractValuesInBrackets(string input)
     {
         var values = new List<string>();
         var stack = new Stack<int>();
