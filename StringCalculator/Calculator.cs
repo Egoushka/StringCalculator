@@ -83,13 +83,7 @@ public class Calculator
         {
             var character = input[index];
 
-            if (character == '[')
-            {
-                length++;
-                continue;
-            }
-
-            if (input[index + 1] == '[')
+            if (character == ']' && input[index + 1] == '[')
             {
                 break;
             }
