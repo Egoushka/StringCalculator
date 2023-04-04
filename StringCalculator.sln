@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculator", "StringC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculator.Tests", "StringCalculator.Tests\StringCalculator.Tests.csproj", "{D95BEFEB-0A65-4FB2-9029-B0859863DFE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringCalculator.Console", "StringCalculator.Console\StringCalculator.Console.csproj", "{9B7CA3B9-4D7C-4D77-A1FE-93E28DA7044E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{D95BEFEB-0A65-4FB2-9029-B0859863DFE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D95BEFEB-0A65-4FB2-9029-B0859863DFE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D95BEFEB-0A65-4FB2-9029-B0859863DFE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B7CA3B9-4D7C-4D77-A1FE-93E28DA7044E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B7CA3B9-4D7C-4D77-A1FE-93E28DA7044E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B7CA3B9-4D7C-4D77-A1FE-93E28DA7044E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B7CA3B9-4D7C-4D77-A1FE-93E28DA7044E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
