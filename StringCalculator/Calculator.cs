@@ -17,22 +17,22 @@ public class Calculator
 
         return numbersAsInts.Sum();
     }
-    
+
     private IEnumerable<int> ParseExpression(string expression)
     {
-        var separators = new List<string> {",", "\\n", "\\"};
+        var separators = new List<string> { ",", "\\n", "\\" };
         var numbersToProcess = expression;
         var partWithSeparators = expression.Split("\\n").First();
-        
-        if(partWithSeparators.StartsWith("//"))
+
+        if (partWithSeparators.StartsWith("//"))
         {
             var customSeparators = GetCustomSeparators(partWithSeparators);
             separators.AddRange(customSeparators);
-            
+
             var numbersStartIndex = partWithSeparators.Length + 2;
             numbersToProcess = expression.Substring(numbersStartIndex);
         }
-        
+
         return numbersToProcess.Split(separators.ToArray(), StringSplitOptions.RemoveEmptyEntries)
             .Select(x => int.Parse(x));
     }
@@ -59,26 +59,25 @@ public class Calculator
 
     private IEnumerable<string> ExtractValuesInBrackets(string input)
     {
-        var allowedSeparatorBoundaryCharacters = new[] {'[', ']'};
+        var allowedSeparatorBoundaryCharacters = new[] { '[', ']' };
         var bracketsIndexes = input
             .Select((character, index) => (character, index))
             .Where(x => allowedSeparatorBoundaryCharacters.Contains(x.character))
             .Select(bracket => bracket.index);
-        
+
         var startIndex = -1;
         foreach (var index in bracketsIndexes)
         {
             var bracket = input[index];
             if (startIndex != -1)
             {
-                
+
                 if (bracket != ']' || (index != input.Length - 1 && input[index + 1] != '[')) continue;
-                
+
                 var length = index - startIndex - 1;
                 var value = input.Substring(startIndex + 1, length);
-                
                 startIndex = -1;
-                
+
                 yield return value;
             }
             else if (bracket == '[')
@@ -87,12 +86,11 @@ public class Calculator
             }
         }
     }
-    
 
     private void ThrowExceptionIfAnyNegativeNumbers(IEnumerable<int> numbers)
     {
         var negativeNumbers = numbers.Where(x => x < 0);
-        
+
         if (negativeNumbers.Any())
         {
             throw new ArgumentException($"Negative numbers are not allowed ({string.Join(", ", negativeNumbers)})");
