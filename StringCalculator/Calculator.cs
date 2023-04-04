@@ -69,7 +69,6 @@ public class Calculator
 
             var length = FindLenghtOfValueInBrackets(input, index);
             var value = input.Substring(index + 1, length - 1);
-            ;
 
             index += length;
             result.Add(value);
