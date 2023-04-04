@@ -2,7 +2,7 @@ namespace StringCalculator;
 
 public class Calculator
 {
-    public int Add(string expression)
+    public virtual int Add(string expression)
     {
         var upperLimit = 1000;
         if (string.IsNullOrEmpty(expression))
