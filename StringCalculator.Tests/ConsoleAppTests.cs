@@ -47,7 +47,7 @@ public class ConsoleAppTests
     }
 
     [Fact]
-    public void Run_OneNumber_PrintResult()
+    public void Run_OneNumber_PrintNumber()
     {
         // Arrange
         _consoleWrapper.SetupSequence(x => x.ReadLine())
@@ -92,7 +92,7 @@ public class ConsoleAppTests
     }
 
     [Fact]
-    public void Run_NumbersAboveUpperLimit_PrintSumWithoutNumberAboveLimit()
+    public void Run_NumbersAboveUpperLimit_PrintSumWithoutNumberThatAboveLimit()
     {
         // Arrange
         _consoleWrapper.SetupSequence(x => x.ReadLine())
