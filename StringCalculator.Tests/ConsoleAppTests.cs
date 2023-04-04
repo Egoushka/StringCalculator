@@ -51,24 +51,7 @@ public class ConsoleAppTests
     }
 
     [Fact]
-    public void Run_OneNumber_PrintNumber()
-    {
-        // Arrange
-        _consoleWrapper.SetupSequence(x => x.ReadLine())
-            .Returns("1")
-            .Returns("");
-        _calculator.SetupSequence(x => x.Add(It.IsAny<string>()))
-            .Returns(1);
-
-        // Act
-        _consoleApp.Run();
-
-        // Assert
-        _consoleWrapper.Verify(x => x.WriteLine("Result: 1"), Times.Once);
-    }
-
-    [Fact]
-    public void Run_TwoInputs_PrintLastResult()
+    public void Run_TwoInputs_PrintResults()
     {
         // Arrange
         _consoleWrapper.SetupSequence(x => x.ReadLine())
@@ -83,6 +66,7 @@ public class ConsoleAppTests
         _consoleApp.Run();
 
         // Assert
+        _consoleWrapper.Verify(x => x.WriteLine("Result: 1"), Times.Once);
         _consoleWrapper.Verify(x => x.WriteLine("Result: 2"), Times.Once);
     }
 }
