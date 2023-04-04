@@ -1,9 +1,7 @@
 using Moq;
-using StringCalculator;
-using StringCalculator.Console;
 using Xunit;
 
-namespace StringCalculatorTests;
+namespace StringCalculator.Console.Tests;
 
 public class ConsoleAppTests
 {
