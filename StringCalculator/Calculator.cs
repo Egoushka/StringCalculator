@@ -9,13 +9,12 @@ public class Calculator
         {
             return 0;
         }
-
-        var numbersAsInts = ParseExpression(expression)
+        var parsedExpressionNumbers = ParseExpression(expression)
             .Where(x => x <= upperLimit);
 
-        ThrowExceptionIfAnyNegativeNumbers(numbersAsInts);
+        ThrowExceptionIfAnyNegativeNumbers(parsedExpressionNumbers);
 
-        return numbersAsInts.Sum();
+        return parsedExpressionNumbers.Sum();
     }
 
     private IEnumerable<int> ParseExpression(string expression)
