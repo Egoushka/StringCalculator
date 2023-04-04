@@ -1,15 +1,10 @@
-﻿using StringCalculator;
+﻿namespace StringCalculator.Console;
 
-var calculator = new Calculator();
-
-while (true)
+static class Program
 {
-    Console.WriteLine("Enter comma separated numbers(enter to exit):");
-    var input = Console.ReadLine();
-    if (string.IsNullOrEmpty(input))
+    public static void Main(string[] args)
     {
-        break;
+        var consoleApp = new ConsoleApp(new ConsoleWrapper());
+        consoleApp.Run();
     }
-    var result = calculator.Add(input);
-    Console.WriteLine($"Result: {result}");
 }
