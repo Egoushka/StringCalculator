@@ -59,32 +59,41 @@ public class Calculator
 
     private IEnumerable<string> ExtractValuesInBrackets(string input)
     {
-        var allowedSeparatorBoundaryCharacters = new[] { '[', ']' };
-        var bracketsIndexes = input
-            .Select((character, index) => (character, index))
-            .Where(x => allowedSeparatorBoundaryCharacters.Contains(x.character))
-            .Select(bracket => bracket.index);
-
-        var startIndex = -1;
-        foreach (var index in bracketsIndexes)
+        var result = new List<string>();
+        
+        for (var index = 0; index < input.Length; index++)
         {
-            var bracket = input[index];
-            if (startIndex != -1)
+            if (input[index] != '[') continue;
+
+            var length = FindLenghtOfValueInBrackets(input, index);
+            var value = ExtractValueInBrackets(input, index, length);
+            
+            index += length;
+            result.Add(value);
+        }
+
+        return result;
+    }
+    private int FindLenghtOfValueInBrackets(string input, int startIndex)
+    {
+        var length = 0;
+        for (var index = startIndex; index < input.Length - 1; index++, length++)
+        {
+            var character = input[index];
+            
+            if(character == '[') continue;
+            
+            if (input[index + 1] == '[')
             {
-
-                if (bracket != ']' || (index != input.Length - 1 && input[index + 1] != '[')) continue;
-
-                var length = index - startIndex - 1;
-                var value = input.Substring(startIndex + 1, length);
-                startIndex = -1;
-
-                yield return value;
-            }
-            else if (bracket == '[')
-            {
-                startIndex = index;
+                break;
             }
         }
+        return length;
+    }
+    private string ExtractValueInBrackets(string input, int startIndex, int length)
+    {
+        var value = input.Substring(startIndex + 1, length - 1);
+        return value;
     }
 
     private void ThrowExceptionIfAnyNegativeNumbers(IEnumerable<int> numbers)
