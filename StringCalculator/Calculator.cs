@@ -52,14 +52,14 @@ public class Calculator
         }
         else
         {
-            var separatorsInBrackets = ExtractValuesInBrackets(input);
+            var separatorsInBrackets = ExtractSeparatorsInBrackets(input);
             separators.AddRange(separatorsInBrackets);
         }
 
         return separators;
     }
 
-    private IEnumerable<string> ExtractValuesInBrackets(string input)
+    private IEnumerable<string> ExtractSeparatorsInBrackets(string input)
     {
         var result = new List<string>();
 
@@ -67,30 +67,35 @@ public class Calculator
         {
             if (input[index] != '[') continue;
 
-            var length = FindLenghtOfValueInBrackets(input, index);
-            var value = input.Substring(index + 1, length - 1);
+            var length = FindLenghtOfSeparatorInBrackets(input, index);
+            var separator = input.Substring(index + 1, length - 1);
 
             index += length;
-            result.Add(value);
+            result.Add(separator);
         }
 
         return result;
     }
 
-    private int FindLenghtOfValueInBrackets(string input, int startIndex)
+    private int FindLenghtOfSeparatorInBrackets(string input, int startIndex)
     {
         var length = 0;
 
-        for (var index = startIndex; index < input.Length - 1; index++, length++)
+        for (var index = startIndex; index < input.Length - 1; index++)
         {
             var character = input[index];
 
-            if (character == '[') continue;
+            if (character == '[')
+            {
+                length++;
+                continue;
+            };
 
             if (input[index + 1] == '[')
             {
                 break;
             }
+            length++;
         }
 
         return length;
