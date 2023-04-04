@@ -50,7 +50,7 @@ public class Calculator
         }
         else
         {
-            var separatorsInBrackets = ExtractValuesInBrackets("");
+            var separatorsInBrackets = ExtractValuesInBrackets(input);
             separators.AddRange(separatorsInBrackets);
         }
 
@@ -59,21 +59,31 @@ public class Calculator
 
     private IEnumerable<string> ExtractValuesInBrackets(string input)
     {
-        var stack = new Stack<int>();
-
-        for (var index = 0; index < input.Length; index++)
+        var allowedSeparatorBoundaryCharacters = new[] {'[', ']'};
+        var bracketsIndexes = input
+            .Select((character, index) => (character, index))
+            .Where(x => allowedSeparatorBoundaryCharacters.Contains(x.character))
+            .Select(bracket => bracket.index);
+        
+        var startIndex = -1;
+        foreach (var index in bracketsIndexes)
         {
-            var c = input[index];
-            if (c == '[' && stack.Count == 0)
+            var bracket = input[index];
+            if (startIndex != -1)
             {
-                stack.Push(index);
-            }
-            else if (c == ']' && stack.Count > 0 && (index == input.Length - 1 || input[index + 1] == '['))
-            {
-                var startIndex = stack.Pop();
+                
+                if (bracket != ']' || (index != input.Length - 1 && input[index + 1] != '[')) continue;
+                
                 var length = index - startIndex - 1;
                 var value = input.Substring(startIndex + 1, length);
+                
+                startIndex = -1;
+                
                 yield return value;
+            }
+            else if (bracket == '[')
+            {
+                startIndex = index;
             }
         }
     }
