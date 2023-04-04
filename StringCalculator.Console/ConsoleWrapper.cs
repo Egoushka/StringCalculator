@@ -1,13 +1,13 @@
 namespace StringCalculator.Console;
 
-public class ConsoleWrapper : IConsoleWrapper
+public class ConsoleWrapper
 {
-    public string ReadLine()
+    public virtual string ReadLine()
     {
         return System.Console.ReadLine();
     }
 
-    public void WriteLine(string message)
+    public virtual void WriteLine(string message)
     {
         System.Console.WriteLine(message);
     }
