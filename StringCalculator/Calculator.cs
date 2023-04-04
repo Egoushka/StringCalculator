@@ -1,5 +1,3 @@
-using System.Dynamic;
-
 namespace StringCalculator;
 
 public class Calculator
@@ -89,7 +87,7 @@ public class Calculator
             {
                 length++;
                 continue;
-            };
+            }
 
             if (input[index + 1] == '[')
             {
