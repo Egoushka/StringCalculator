@@ -18,11 +18,14 @@ public class ConsoleApp
         while (true)
         {
             var input = _consoleWrapper.ReadLine();
+            
             if (string.IsNullOrEmpty(input))
             {
                 break;
             }
+            
             var result = _calculator.Add(input);
+            
             _consoleWrapper.WriteLine($"Result: {result}");
             _consoleWrapper.WriteLine("you can enter other numbers (enter to exit)?");
 

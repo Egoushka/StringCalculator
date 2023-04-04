@@ -10,6 +10,7 @@ public class ConsoleAppTests
     private readonly ConsoleApp _consoleApp;
     private readonly Mock<ConsoleWrapper> _consoleWrapper;
     private readonly Mock<Calculator> _calculator;
+
     public ConsoleAppTests()
     {
         _calculator = new Mock<Calculator>();
@@ -24,13 +25,14 @@ public class ConsoleAppTests
         // Arrange
         _consoleWrapper.Setup(x => x.ReadLine()).Returns("");
         _calculator.Setup(x => x.Add("")).Returns(0);
-        
+
         // Act
         _consoleApp.Run();
 
         // Assert
         _consoleWrapper.Verify(x => x.WriteLine("Enter comma separated numbers(enter to exit):"), Times.Once);
     }
+
     [Fact]
     public void Run_OneNumber_PrintSecondTryMessage()
     {
@@ -47,7 +49,7 @@ public class ConsoleAppTests
         // Assert
         _consoleWrapper.Verify(x => x.WriteLine("you can enter other numbers (enter to exit)?"), Times.Once);
     }
-    
+
     [Fact]
     public void Run_OneNumber_PrintNumber()
     {
@@ -83,6 +85,4 @@ public class ConsoleAppTests
         // Assert
         _consoleWrapper.Verify(x => x.WriteLine("Result: 2"), Times.Once);
     }
-
-  
 }
