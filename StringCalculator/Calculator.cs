@@ -1,3 +1,5 @@
+using System.Dynamic;
+
 namespace StringCalculator;
 
 public class Calculator
@@ -9,6 +11,7 @@ public class Calculator
         {
             return 0;
         }
+
         var parsedExpressionNumbers = ParseExpression(expression)
             .Where(x => x <= upperLimit);
 
@@ -59,40 +62,39 @@ public class Calculator
     private IEnumerable<string> ExtractValuesInBrackets(string input)
     {
         var result = new List<string>();
-        
+
         for (var index = 0; index < input.Length; index++)
         {
             if (input[index] != '[') continue;
 
             var length = FindLenghtOfValueInBrackets(input, index);
-            var value = ExtractValueInBrackets(input, index, length);
-            
+            var value = input.Substring(index + 1, length - 1);
+            ;
+
             index += length;
             result.Add(value);
         }
 
         return result;
     }
+
     private int FindLenghtOfValueInBrackets(string input, int startIndex)
     {
         var length = 0;
+
         for (var index = startIndex; index < input.Length - 1; index++, length++)
         {
             var character = input[index];
-            
-            if(character == '[') continue;
-            
+
+            if (character == '[') continue;
+
             if (input[index + 1] == '[')
             {
                 break;
             }
         }
+
         return length;
-    }
-    private string ExtractValueInBrackets(string input, int startIndex, int length)
-    {
-        var value = input.Substring(startIndex + 1, length - 1);
-        return value;
     }
 
     private void ThrowExceptionIfAnyNegativeNumbers(IEnumerable<int> numbers)
