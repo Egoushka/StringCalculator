@@ -2,16 +2,17 @@ namespace StringCalculator.Console;
 
 public class ConsoleApp
 {
-    private readonly IConsoleWrapper _consoleWrapper;
+    private readonly ConsoleWrapper _consoleWrapper;
+    private readonly Calculator _calculator;
 
-    public ConsoleApp(IConsoleWrapper consoleWrapper)
+    public ConsoleApp(ConsoleWrapper consoleWrapper, Calculator calculator)
     {
         _consoleWrapper = consoleWrapper;
+        _calculator = calculator;
     }
 
     public void Run()
     {
-        var calculator = new Calculator();
         _consoleWrapper.WriteLine("Enter comma separated numbers(enter to exit):");
 
         while (true)
@@ -21,7 +22,7 @@ public class ConsoleApp
             {
                 break;
             }
-            var result = calculator.Add(input);
+            var result = _calculator.Add(input);
             _consoleWrapper.WriteLine($"Result: {result}");
             _consoleWrapper.WriteLine("you can enter other numbers (enter to exit)?");
 
