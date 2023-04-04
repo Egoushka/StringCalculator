@@ -34,7 +34,7 @@ public class ConsoleAppTests
     }
 
     [Fact]
-    public void Run_OneNumber_PrintSecondTryMessage()
+    public void Run_OneNumber_PrintSecondInputMessage()
     {
         // Arrange
         _consoleWrapper.SetupSequence(x => x.ReadLine())
@@ -68,7 +68,7 @@ public class ConsoleAppTests
     }
 
     [Fact]
-    public void Run_TwoInputs_PrintTwoResults()
+    public void Run_TwoInputs_PrintLastResult()
     {
         // Arrange
         _consoleWrapper.SetupSequence(x => x.ReadLine())
