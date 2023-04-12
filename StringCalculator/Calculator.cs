@@ -51,41 +51,16 @@ public class Calculator
         }
         else
         {
-            var separatorsInBrackets = ExtractSeparatorsInBrackets(input);
-            separators.AddRange(separatorsInBrackets);
+            var lengthOfCustomSeparators = input.Length - minimumCustomSeparatorLength - 1;
+            
+            var customSeparators = 
+                input.Substring(minimumCustomSeparatorLength, lengthOfCustomSeparators)
+                     .Split("][");
+            
+            separators.AddRange(customSeparators);
         }
 
         return separators;
-    }
-
-    private IEnumerable<string> ExtractSeparatorsInBrackets(string input)
-    {
-        var result = new List<string>();
-
-        for (var index = 0; index < input.Length; index++)
-        {
-            if (input[index] != '[') continue;
-
-            var length = FindLenghtOfSeparatorInBrackets(input, index);
-            var separator = input.Substring(index + 1, length - 1);
-
-            index += length;
-            result.Add(separator);
-        }
-
-        return result;
-    }
-
-    private int FindLenghtOfSeparatorInBrackets(string input, int startIndex)
-    {
-        var indexOfBrackets = input.IndexOf("][", startIndex, StringComparison.Ordinal);
-
-        if (indexOfBrackets > 0)
-        {
-            return indexOfBrackets - startIndex;
-        }
-
-        return input.Length - startIndex - 1;
     }
 
     private void ThrowExceptionIfAnyNegativeNumbers(IEnumerable<int> numbers)
