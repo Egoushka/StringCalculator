@@ -27,7 +27,7 @@ public class Calculator
         if (partWithSeparators.StartsWith("//"))
         {
             var customSeparators = GetCustomSeparators(partWithSeparators);
-            separators.AddRange(customSeparators);
+            separators = customSeparators.ToList();
 
             var numbersStartIndex = partWithSeparators.Length + 2;
             numbersToProcess = expression.Substring(numbersStartIndex);
@@ -83,6 +83,7 @@ public class Calculator
         {
             return indexOfBrackets - startIndex;
         }
+        
         return input.Length - startIndex - 1;
     }
 
