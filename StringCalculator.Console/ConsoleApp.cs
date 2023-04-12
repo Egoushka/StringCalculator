@@ -28,7 +28,6 @@ public class ConsoleApp
             
             _consoleWrapper.WriteLine($"Result: {result}");
             _consoleWrapper.WriteLine("you can enter other numbers (enter to exit)?");
-
         }
     }
 }

@@ -5,9 +5,10 @@ public class Calculator
     public virtual int Add(string expression)
     {
         var upperLimit = 1000;
+
         if (string.IsNullOrEmpty(expression))
         {
-            return 0;
+            return default;
         }
 
         var parsedExpressionNumbers = ParseExpression(expression)
@@ -78,12 +79,12 @@ public class Calculator
     private int FindLenghtOfSeparatorInBrackets(string input, int startIndex)
     {
         var indexOfBrackets = input.IndexOf("][", startIndex, StringComparison.Ordinal);
-        
+
         if (indexOfBrackets > 0)
         {
             return indexOfBrackets - startIndex;
         }
-        
+
         return input.Length - startIndex - 1;
     }
 
