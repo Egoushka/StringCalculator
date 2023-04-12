@@ -77,20 +77,13 @@ public class Calculator
 
     private int FindLenghtOfSeparatorInBrackets(string input, int startIndex)
     {
-        var length = 0;
-
-        for (var index = startIndex; index < input.Length - 1; index++)
+        var indexOfBrackets = input.IndexOf("][", startIndex, StringComparison.Ordinal);
+        
+        if (indexOfBrackets > 0)
         {
-            var character = input[index];
-
-            if (character == ']' && input[index + 1] == '[')
-            {
-                break;
-            }
-            length++;
+            return indexOfBrackets - startIndex;
         }
-
-        return length;
+        return input.Length - startIndex - 1;
     }
 
     private void ThrowExceptionIfAnyNegativeNumbers(IEnumerable<int> numbers)
