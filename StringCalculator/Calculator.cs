@@ -11,8 +11,9 @@ public class Calculator
             return default;
         }
 
-        var parsedExpressionNumbers = ParseExpression(expression)
-            .Where(x => x <= upperLimit);
+        var parsedExpressionNumbers = ParseExpression(expression);
+        
+        parsedExpressionNumbers = FilterNumbersAboveUpperLimit(parsedExpressionNumbers, upperLimit);
 
         ThrowExceptionIfAnyNegativeNumbers(parsedExpressionNumbers);
 
@@ -62,7 +63,7 @@ public class Calculator
 
         return separators;
     }
-
+    
     private void ThrowExceptionIfAnyNegativeNumbers(IEnumerable<int> numbers)
     {
         var negativeNumbers = numbers.Where(x => x < 0);
@@ -71,5 +72,10 @@ public class Calculator
         {
             throw new ArgumentException($"Negative numbers are not allowed ({string.Join(", ", negativeNumbers)})");
         }
+    }
+    
+    private IEnumerable<int> FilterNumbersAboveUpperLimit(IEnumerable<int> numbers, int upperLimit = 1000)
+    {
+        return numbers.Where(x => x <= upperLimit);
     }
 }
