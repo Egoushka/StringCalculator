@@ -31,7 +31,7 @@ public class CalculatorTests
     [Fact]
     public void Add_WithDifferentSeparators_ShouldReturnSum()
     {
-        var result = _calculator.Add("//;\\n1;\\n2,\\3");
+        var result = _calculator.Add("//;\\n1;2;3");
         
         Assert.Equal(6, result);
     }
